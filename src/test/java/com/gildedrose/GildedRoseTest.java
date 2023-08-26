@@ -22,18 +22,22 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals("foo", app.items[0].name);
-        assertEquals(19, app.items[0].quality);
         assertEquals(-1, app.items[0].sellIn);
+        //Currently, the quality is decreased twice : 1 as usual, and 1 because sellIn < 0
+        assertEquals(18, app.items[0].quality);
     }
 
     @Test
     void fooQualityNeverNegative() {
         Item[] items = new Item[] { new Item("foo", 20, 5) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+
+        for (int i = 0; i < 15; i++){
+            app.updateQuality();
+        }
         assertEquals("foo", app.items[0].name);
-        assertEquals(19, app.items[0].quality);
-        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+        assertEquals(5, app.items[0].sellIn);
     }
 
     @Test
@@ -109,5 +113,10 @@ class GildedRoseTest {
 
         assertEquals(currentQuality, 50);
         assertEquals(currentSellIn, 0);
+
+        app.updateQuality();
+        //Quality should be 0 after the concert
+        assertEquals(0, app.items[0].quality);
+        assertEquals(-1, app.items[0].sellIn);
     }
 }
