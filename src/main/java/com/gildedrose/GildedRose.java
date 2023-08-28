@@ -5,7 +5,7 @@ import java.util.List;
 class GildedRose {
     static {
         String fileName = "legendary";
-        legendaries = FileHelper.readItemsFromResource(fileName);
+        legendary = FileHelper.readItemsFromResource(fileName);
 
         fileName = "aged";
         aged = FileHelper.readItemsFromResource(fileName);
@@ -18,7 +18,7 @@ class GildedRose {
     }
 
 
-    static List<String> legendaries;
+    static List<String> legendary;
     static List<String> aged;
     static List<String> conjured;
     static List<String> backstage;
@@ -31,7 +31,7 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             String itemName = item.name;
-            if (legendaries.contains(itemName)) {
+            if (legendary.contains(itemName)) {
                 //Nothing to do because nothing changes for legendary stuff
             } else if (aged.contains(itemName)) {
                 handleAged(item);
